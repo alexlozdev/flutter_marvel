@@ -49,9 +49,15 @@ class CommonImageView extends StatelessWidget {
           // network image url
           child = CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: placeholder ? (context, url) => const CircularProgressIndicator(
-              strokeWidth: 1.0,
-              color: Constants.fgPrimary,
+            placeholder: placeholder ? (context, url) => const Center(
+              child: SizedBox(
+                height: 25,
+                width: 25,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1.0,
+                  color: Constants.fgPrimary,
+                ),
+              ),
             ) : null,
             errorWidget: (context, url, error) => errorWidget,
             fit: fit,

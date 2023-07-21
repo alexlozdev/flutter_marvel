@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'screens/home/bloc/home_bloc.dart';
-import 'screens/start/bloc/start_bloc.dart';
-import 'screens/start/view/start.dart';
-import 'screens/user/bloc/user_bloc.dart';
+import 'screens/home/view/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,16 +22,10 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => StartBloc(),
-          ),
-          BlocProvider(
             create: (_) => HomeBloc(),
           ),
-          BlocProvider(
-            create: (_) => UserBloc(),
-          ),
         ],
-        child: const StartScreen(),
+        child: const HomeScreen(),
       ),
     );
   }

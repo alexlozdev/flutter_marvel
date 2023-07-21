@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:marvel/model/marvel_data.dart';
 
 import '../../../model/category.dart';
-import '../../../model/good.dart';
+import '../../../repo/character_rest.dart';
+import '../../../repo/comic_rest.dart';
+import '../../../repo/series_rest.dart';
 import '../model/portfolio.dart';
 
 part 'home_event.dart';
@@ -11,44 +14,53 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(
     HomeState.initial(
-      goods: _selectCategory(Category.news),
       portfolios: _initPortfolios(),
     )
   ) {
     /// change category
-    on<HomeCategoryChanged>((event, emit) {
+    on<HomeCategoryChanged>((event, emit) async {
       final categoryLabel = event.category.label;
       // get goods according to the category.
-      List<Good> goods = _selectCategory(categoryLabel);
+      emit(state.copyWith(loading: true));
+      return _selectCategory(categoryLabel).then((value) {
 
-      emit(state.copyWith(
-        category: state.category.copyWith(label: event.category.label),
-        goods: goods,
-      ));
+        MarvelData marvelData = value ?? MarvelData.fromJson({});
+        final goods = marvelData.getGoods();
+
+        emit(state.copyWith(
+          loading: false,
+          category: state.category.copyWith(label: event.category.label),
+          marvelData: state.marvelData.copyWith(
+            offset: marvelData.offset,
+            limit: marvelData.limit,
+            total: marvelData.total,
+            count: marvelData.count,
+            results: marvelData.results,
+          ),
+        ));
+
+      });
 
     });
   }
 
   /// select good category
-  static List<Good> _selectCategory(String category) {
+  static Future<MarvelData?> _selectCategory(String category) {
 
-    if (category == Category.news) {
-      return [
-        const Good(id: '', name: 'Economy', image: 'assets/images/car1.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Taxicab', image: 'assets/images/car2.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Luxury', image: 'assets/images/car3.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Luxury', image: 'assets/images/car3.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Luxury', image: 'assets/images/car3.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Luxury', image: 'assets/images/car3.png', description: 'Select the vehicle size and price that fits your comfort level', ),
-      ];
+    if (category == Category.characters) {
+      return CharacterRest.getAll().then((value) {
+        return value;
+      });
+    } else if (category == Category.movies) {
+      return SeriesRest.getAll().then((value) {
+        return value;
+      });
     } else if (category == Category.comics) {
-      return [
-        const Good(id: '', name: 'Sandwich1', image: 'assets/images/eat1.png', description: 'Select the sandwich size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Sandwich2', image: 'assets/images/eat2.png', description: 'Select the sandwich size and price that fits your comfort level', ),
-        const Good(id: '', name: 'Sandwich3', image: 'assets/images/eat3.png', description: 'Select the sandwich size and price that fits your comfort level', ),
-      ];
+      return ComicRest.getAll().then((value) {
+        return value;
+      });
     } else {
-      return [];
+      return Future.value(null);
     }
   }
 

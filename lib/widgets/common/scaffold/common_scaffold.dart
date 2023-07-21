@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../const/constants.dart';
+import '../progress/common_modal_hud.dart';
 
 class CommonScaffold extends StatelessWidget {
   /// app bar
@@ -18,6 +19,8 @@ class CommonScaffold extends StatelessWidget {
 
   final Widget? bottom;
 
+  final bool? loading;
+
   /// common screen widget
   const CommonScaffold({
     Key? key,
@@ -26,6 +29,7 @@ class CommonScaffold extends StatelessWidget {
     required this.body,
     this.ad,
     this.bottom,
+    this.loading,
   }) : super(key: key);
 
   @override
@@ -38,42 +42,45 @@ class CommonScaffold extends StatelessWidget {
       screenHeight = screenHeight - appBarHeight - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
     }
 
-    return Scaffold(
-      appBar: appBar,
-      drawer: drawer,
-      backgroundColor: Constants.bgPrimary,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: screenHeight,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          body,
-                          if (ad != null) ...[
-                            Positioned(
-                              left: 0,
-                              bottom: 0,
-                              right: 0,
-                              child: ad!,
-                            ),
+    return CommonModalHud(
+      loading: loading,
+      child: Scaffold(
+        appBar: appBar,
+        drawer: drawer,
+        backgroundColor: Constants.bgPrimary,
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: screenHeight,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            body,
+                            if (ad != null) ...[
+                              Positioned(
+                                left: 0,
+                                bottom: 0,
+                                right: 0,
+                                child: ad!,
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
-                    ),
-                    if (bottom != null) ...[
-                      bottom!,
+                      if (bottom != null) ...[
+                        bottom!,
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 

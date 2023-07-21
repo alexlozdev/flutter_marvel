@@ -2,34 +2,45 @@ part of 'home_bloc.dart';
 
 /// start state
 final class HomeState extends Equatable {
+  /// loading progress
+  final bool loading;
+
   final Category category;
 
-  final List<Good> goods;
+  final MarvelData marvelData;
 
   final List<Portfolio> portfolios;
 
   const HomeState({
+    required this.loading,
     required this.category,
-    required this.goods,
+    required this.marvelData,
     required this.portfolios,
   });
 
-  HomeState.initial({List<Good>? goods, List<Portfolio>? portfolios})
-      : this(category: Category.all[0], goods: goods ?? [], portfolios: portfolios ?? []);
+  HomeState.initial({bool? loading, Category? category, MarvelData? marvelData, List<Portfolio>? portfolios})
+      : this(
+          loading: loading ?? false,
+          category: category ?? const Category(label: ''),
+          marvelData: marvelData ?? MarvelData.fromJson({}),
+          portfolios: portfolios ?? []
+        );
 
   HomeState copyWith({
+    bool? loading,
     Category? category,
-    List<Good>? goods,
+    MarvelData? marvelData,
     List<Portfolio>? portfolios,
   }) {
     return HomeState(
+        loading: loading ?? this.loading,
         category: category ?? this.category,
-        goods: goods ?? this.goods,
+        marvelData: marvelData ?? this.marvelData,
         portfolios: portfolios ?? this.portfolios,
     );
   }
 
   @override
-  List<Object?> get props => [category, goods, portfolios];
+  List<Object?> get props => [loading, category, marvelData, portfolios];
 
 }

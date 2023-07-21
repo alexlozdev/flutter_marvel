@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:marvel/screens/start/model/page_item.dart';
 import 'package:marvel/widgets/common/inkwell/common_inkwell.dart';
 import 'package:marvel/widgets/common/text/common_label.dart';
 
-import '../../../const/constants.dart';
+import '../../../../const/constants.dart';
+import '../../../../model/category.dart';
 
-class StartDrawer extends StatelessWidget {
+class HomeDrawer extends StatelessWidget {
   /// page items
-  final List<PageItem> pageItems;
+  final List<Category> items;
 
   /// selected page item
-  final PageItem? selPageItem;
+  final Category? selItem;
 
   /// callback when changed page item.
-  final Function(PageItem)? onChanged;
+  final Function(Category)? onChanged;
 
   /// home screen drawer
-  const StartDrawer({
+  const HomeDrawer({
     Key? key,
-    required this.pageItems,
-    this.selPageItem,
+    required this.items,
+    this.selItem,
     this.onChanged,
   }) : super(key: key);
 
@@ -52,7 +52,7 @@ class StartDrawer extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: pageItems.map((entry) {
+                  children: items.map((entry) {
                     return CommonInkWell(
                       vSpace: 15,
                       onTap: () {
@@ -62,8 +62,8 @@ class StartDrawer extends StatelessWidget {
                           onChanged!(entry);
                         }
                       },
-                      child: CommonLabel(entry.name,
-                        color: entry == selPageItem ? Colors.white : Colors.grey,
+                      child: CommonLabel(entry.label,
+                        color: entry == selItem ? Colors.white : Colors.grey,
                         fontSize: Constants.fntMiddleSize,
                         fontWeight: FontWeight.w500,
                       ),
