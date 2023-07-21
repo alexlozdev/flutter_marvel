@@ -25,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchKeyController = TextEditingController();
+  final HomeBloc _homeBloc = HomeBloc();
 
   @override
   void initState() {
@@ -36,12 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
       DeviceOrientation.portraitDown,
     ]);
 
+    // init by comics
+    _homeBloc.add(const HomeCategoryChanged(Category(label: Category.comics)));
   }
 
   @override
   Widget build(BuildContext context) {
 
     return BlocBuilder<HomeBloc, HomeState>(
+      bloc: _homeBloc,
       builder: (homeContext, homeState) {
 
         final goods = homeState.marvelData.getGoods(searchKey: homeState.searchKey);
@@ -57,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
             selItem: homeState.category,
             items: Category.all,
             onChanged: (value) {
-              homeContext.read<HomeBloc>().add(HomeCategoryChanged(value));
+              //homeContext.read<HomeBloc>().add(HomeCategoryChanged(value));
+              _homeBloc.add(HomeCategoryChanged(value));
             },
           ),
           body: Container(
@@ -70,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   CommonTextFieldSearch(
                     controller: _searchKeyController,
                     onChanged: (value, needUpdate) {
-                      homeContext.read<HomeBloc>().add(HomeSearchKeyChanged(value));
+                      _homeBloc.add(HomeSearchKeyChanged(value));
                     },
                     onSearch: () {
                     },

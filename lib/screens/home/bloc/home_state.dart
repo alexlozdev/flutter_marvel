@@ -27,7 +27,7 @@ final class HomeState extends Equatable {
   }) : this(
     loading: loading ?? false,
     searchKey: searchKey ?? '',
-    category: category ?? const Category(label: Category.comics),
+    category: category ?? const Category(label: ''),
     marvelData: marvelData ?? MarvelData.fromJson({}),
   );
 
