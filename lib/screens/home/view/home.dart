@@ -24,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _searchKeyController = TextEditingController();
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (homeContext, homeState) {
 
-        final goods = homeState.marvelData.getGoods();
+        final goods = homeState.marvelData.getGoods(searchKey: homeState.searchKey);
 
         return CommonScaffold(
           appBar: CommonAppBar(
@@ -67,8 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // search
                   CommonTextFieldSearch(
-                    selValue: '',
+                    controller: _searchKeyController,
                     onChanged: (value, needUpdate) {
+                      homeContext.read<HomeBloc>().add(HomeSearchKeyChanged(value));
                     },
                     onSearch: () {
                     },

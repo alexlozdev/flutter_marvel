@@ -16,3 +16,13 @@ final class HomeCategoryChanged extends HomeEvent {
   @override
   List<Object> get props => [category];
 }
+
+final class HomeSearchKeyChanged extends HomeEvent {
+  /// selected category
+  final String searchKey;
+
+  const HomeSearchKeyChanged(this.searchKey);
+
+  @override
+  List<Object> get props => [searchKey];
+}

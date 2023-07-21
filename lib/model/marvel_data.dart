@@ -62,13 +62,22 @@ class MarvelData extends Equatable {
   }
 
   /// convert results map to goods object list
-  List<Good> getGoods() {
+  List<Good> getGoods({String? searchKey}) {
     final List<Good> goods = [];
     for (dynamic item in results) {
       try {
         Map<String, dynamic> mapItem = item;
-        final good = Good.fromJson(mapItem);
-        goods.add(good);
+        final Good good = Good.fromJson(mapItem);
+
+        // filter by serach key
+        if (searchKey != null) {
+          final lowerSearchKey = searchKey.toLowerCase();
+          if (good.name.toLowerCase().contains(lowerSearchKey) || good.description.toLowerCase().contains(lowerSearchKey)) {
+            goods.add(good);
+          }
+        } else {
+          goods.add(good);
+        }
       } catch (e) {
         LogUtility.print(e);
       }

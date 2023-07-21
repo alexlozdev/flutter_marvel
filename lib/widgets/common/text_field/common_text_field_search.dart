@@ -7,7 +7,7 @@ import '../inkwell/common_inkwell.dart';
 class CommonTextFieldSearch extends StatelessWidget {
 
   /// selected item value
-  final String? selValue;
+  final TextEditingController controller;
 
   /// items for selecting
   final List<String> items;
@@ -47,7 +47,7 @@ class CommonTextFieldSearch extends StatelessWidget {
 
   const CommonTextFieldSearch({
     Key? key,
-    this.selValue,
+    required this.controller,
     this.items = const [],
     this.onChanged,
     this.onSearch,
@@ -71,7 +71,7 @@ class CommonTextFieldSearch extends StatelessWidget {
     const double hPadding = Constants.textContainerPaddingH;
 
     return TextField(
-      controller: TextEditingController(text: selValue),
+      controller: controller,
       onChanged: (value) {
         if (onChanged != null) {
           onChanged!(value, false);
@@ -105,7 +105,7 @@ class CommonTextFieldSearch extends StatelessWidget {
         ),
         filled: true,
         fillColor: fillColor,
-        hintText: 'What is name?',
+        hintText: 'Please input the search key',
         hintStyle: const TextStyle(
           color: Constants.textPrimaryDark,
         ),

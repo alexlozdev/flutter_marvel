@@ -16,9 +16,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(
-    HomeState.initial(
-      portfolios: _initPortfolios(),
-    )
+    HomeState.initial()
   ) {
     /// change category
     on<HomeCategoryChanged>((event, emit) async {
@@ -50,6 +48,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       });
 
+    });
+
+    /// when changed search key
+    on<HomeSearchKeyChanged>((event, emit) {
+      emit(
+          state.copyWith(
+            searchKey: event.searchKey,
+          )
+      );
     });
   }
 
