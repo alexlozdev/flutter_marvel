@@ -1,10 +1,8 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marvel/widgets/common/inkwell/common_inkwell.dart';
 
-import '../../../../const/constants.dart';
 import '../../../../model/good.dart';
 import '../../../../widgets/common/image/common_image_view.dart';
 import '../../../../widgets/common/text/common_label.dart';
@@ -27,9 +25,18 @@ class GoodBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonInkWell(
       onTap: onPressed,
-      child: CommonImageView(
-        imageUrl: good.thumbnail.getImagePath(),
-        radius: 10,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonImageView(
+            imageUrl: good.thumbnail.getImagePath(),
+            radius: 10,
+          ),
+          CommonLabel(
+            good.name,
+            color: Colors.black,
+          ),
+        ],
       ),
     );
 

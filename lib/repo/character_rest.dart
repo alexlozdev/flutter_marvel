@@ -1,7 +1,5 @@
-import 'package:http/http.dart';
 import 'package:marvel/utility/log_utility.dart';
 
-import '../model/good.dart';
 import '../model/marvel_data.dart';
 import 'marvel_rest.dart';
 

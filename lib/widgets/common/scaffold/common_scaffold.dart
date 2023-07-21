@@ -44,6 +44,7 @@ class CommonScaffold extends StatelessWidget {
 
     return CommonModalHud(
       loading: loading,
+      size: 100,
       child: Scaffold(
         appBar: appBar,
         drawer: drawer,

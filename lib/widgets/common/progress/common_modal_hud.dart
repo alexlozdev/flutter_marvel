@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 /// modal progress hud
 class CommonModalHud extends StatelessWidget{
+  /// size
+  final double? size;
 
   /// loading
   final bool? loading;
@@ -16,6 +18,7 @@ class CommonModalHud extends StatelessWidget{
   /// loading widget
   const CommonModalHud({
     Key? key,
+    this.size,
     this.loading,
     this.alignment = Alignment.center,
     required this.child,
@@ -34,7 +37,11 @@ class CommonModalHud extends StatelessWidget{
           ignoring: loading!,
           child: child,
         ),
-        const CircularProgressIndicator(),
+        SizedBox(
+          width: size,
+          height: size,
+          child: const CircularProgressIndicator(),
+        ),
       ],
     );
   }

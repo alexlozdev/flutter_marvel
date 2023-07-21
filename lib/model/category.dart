@@ -3,33 +3,23 @@ import 'package:equatable/equatable.dart';
 final class Category extends Equatable {
 
   /// category labels
-  static const String news = 'NEWS';
   static const String comics = 'COMICS';
   static const String characters = 'CHARACTERS';
-  static const String movies = 'MOVIES';
-  static const String tvShows = 'TV SHOWS';
-  static const String games = 'GAMES';
-  static const String videos = 'VIDEOS';
-  static const String lifestyle = 'LIFESTYLE';
-  static const String rolePlayingGame = 'ROLE-PLAYING GAME';
-  static const String books = 'BOOKS';
-  static const String podcasts = 'PODCASTS';
-  static const String shop = 'SHOP';
+  static const String series = 'SERIES';
+  static const String creators = 'CREATORS';
+  static const String events = 'EVENTS';
+  static const String stories = 'STORIES';
+
 
   /// pages
   static const all = [
-    Category(label: news,),
     Category(label: comics,),
     Category(label: characters,),
-    Category(label: movies,),
-    Category(label: tvShows,),
-    Category(label: games,),
-    Category(label: videos,),
-    Category(label: lifestyle,),
-    Category(label: rolePlayingGame,),
-    Category(label: books,),
-    Category(label: podcasts),
-    Category(label: shop),
+    Category(label: series,),
+    Category(label: creators,),
+    Category(label: events,),
+    Category(label: stories,),
+
   ];
 
   /// page name

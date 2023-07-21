@@ -8,9 +8,10 @@ import '../../../model/category.dart';
 import '../../../widgets/common/app_bar/common_app_bar.dart';
 import '../../../widgets/common/scaffold/common_scaffold.dart';
 import '../../../widgets/common/text_field/common_text_field_search.dart';
-import 'widgets/home_drawer.dart';
+import '../../detail/detail_screen.dart';
 import '../bloc/home_bloc.dart';
 import 'widgets/good_box.dart';
+import 'widgets/home_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -79,14 +80,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       physics: const ScrollPhysics(),
                       itemCount: goods.length,
                       crossAxisCount: 2,
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: 5,
                       crossAxisSpacing: 10,
                       itemBuilder: (ctx, i) {
 
                         return GoodBox(
                           good: goods[i],
                           onPressed: () {
-
+                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                              return DetailScreen(good: goods[i],);
+                            }));
                           },
                         );
                       },

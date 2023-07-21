@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/constants.dart';
 import '../inkwell/common_inkwell.dart';
-import '../text/common_label.dart';
 
 
 class CommonTextFieldSearch extends StatelessWidget {
@@ -107,7 +105,7 @@ class CommonTextFieldSearch extends StatelessWidget {
         ),
         filled: true,
         fillColor: fillColor,
-        hintText: 'Where to?',
+        hintText: 'What is name?',
         hintStyle: const TextStyle(
           color: Constants.textPrimaryDark,
         ),
@@ -115,36 +113,6 @@ class CommonTextFieldSearch extends StatelessWidget {
           onTap: onSearch,
           child: const Icon(Icons.search,
             color: Constants.textPrimaryDark,
-          ),
-        ),
-        suffixIcon: SizedBox(
-          width: 100,
-          child: CommonInkWell(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Icon(CupertinoIcons.clock,
-                  color: Constants.textPrimaryDark,
-                ),
-                const SizedBox(width: 5,),
-                const CommonLabel('Now',
-                  color: Constants.textPrimaryDark,
-                ),
-                const SizedBox(width: 5,),
-                Icon(Icons.keyboard_arrow_down,
-                  color: borderColor,
-                ),
-                const SizedBox(width: 5,),
-              ],
-            ),
-            onTap: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-              Future.delayed(const Duration(milliseconds: 300), () {
-
-
-
-              });
-            },
           ),
         ),
       ),
