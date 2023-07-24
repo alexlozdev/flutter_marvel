@@ -28,7 +28,7 @@ class HomeDrawer extends StatelessWidget {
 
     return Drawer(
       width: MediaQuery.of(context).size.width,
-      backgroundColor: Constants.fgPrimary,
+      //backgroundColor: Constants.fgPrimary,
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.only(
@@ -43,8 +43,9 @@ class HomeDrawer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: const Center(
                 child: CommonLabel('MARVEL',
-                  color: Colors.blueAccent,
+                  color: Colors.red,
                   fontSize: Constants.fntLargeSize,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),

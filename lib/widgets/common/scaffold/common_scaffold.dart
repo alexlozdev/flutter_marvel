@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../const/constants.dart';
 import '../progress/common_modal_hud.dart';
 
 class CommonScaffold extends StatelessWidget {
@@ -48,7 +47,7 @@ class CommonScaffold extends StatelessWidget {
       child: Scaffold(
         appBar: appBar,
         drawer: drawer,
-        backgroundColor: Constants.bgPrimary,
+        //backgroundColor: Constants.bgPrimary,
         body: Column(
           children: [
             Expanded(

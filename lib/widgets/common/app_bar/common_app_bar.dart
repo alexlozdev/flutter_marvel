@@ -30,7 +30,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: Constants.white,
         fontSize: Constants.fntMiddleSize,
       ),
-      backgroundColor: Constants.fgPrimary,
+      //backgroundColor: Constants.fgPrimary,
       shadowColor: Colors.transparent,
       leading: iconData != null ? Builder(
         builder: (BuildContext context) {

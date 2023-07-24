@@ -75,6 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   CommonTextFieldSearch(
                     controller: _searchKeyController,
                     onChanged: (value, needUpdate) {
+                      if (needUpdate) {
+                        _searchKeyController.text = value;
+                      }
                       _homeBloc.add(HomeSearchKeyChanged(value));
                     },
                     onSearch: () {

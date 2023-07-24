@@ -115,6 +115,16 @@ class CommonTextFieldSearch extends StatelessWidget {
             color: Constants.textPrimaryDark,
           ),
         ),
+        suffixIcon: controller.text.isNotEmpty ? CommonInkWell(
+          onTap: () {
+            if (onChanged != null) {
+              onChanged!('', true);
+            }
+          },
+          child: const Icon(Icons.close,
+            color: Constants.textPrimaryDark,
+          ),
+        ) : null,
       ),
       style: TextStyle(
         color: textColor,
