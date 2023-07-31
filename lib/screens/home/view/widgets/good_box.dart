@@ -34,7 +34,7 @@ class GoodBox extends StatelessWidget {
           ),
           CommonLabel(
             good.name,
-            color: Colors.black,
+            color: Colors.grey,
           ),
         ],
       ),
